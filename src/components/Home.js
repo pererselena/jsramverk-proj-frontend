@@ -25,9 +25,16 @@ const Home = () => {
                 {product ?
                     product.map((item, i) => {
                         return (<div key={i} className="product">
-                            <img src={item.imagePath}></img>
+                            <img src={item.imagePath} alt={item.title}></img>
                             <h3>{item.title}</h3>
                             <p>{item.description}</p>
+                            <p className="price">Pris: </p>
+                            <button className="buy">
+                                <div className="circle">
+                                    <span className="icon arrow"></span>
+                                </div>
+                                <p className="button-text">Köp</p>
+                            </button>
                         </div>);
                     })
                     : null}
