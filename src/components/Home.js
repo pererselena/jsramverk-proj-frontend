@@ -21,7 +21,7 @@ const Home = () => {
     return (
         <main>
             <h2>{title}</h2>
-            <article className="me-article">
+            <section className="product-section">
                 {product ?
                     product.map((item, i) => {
                         return (<div key={i} className="product">
@@ -29,7 +29,7 @@ const Home = () => {
                             <h3>{item.title}</h3>
                             <p>{item.description}</p>
                             <p className="price">Pris: </p>
-                            <button className="buy">
+                            <button className="button buy">
                                 <div className="circle">
                                     <span className="icon arrow"></span>
                                 </div>
@@ -38,7 +38,7 @@ const Home = () => {
                         </div>);
                     })
                     : null}
-            </article>
+            </section>
         </main>
     );
 };

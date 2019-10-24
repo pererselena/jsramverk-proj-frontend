@@ -44,9 +44,12 @@ class MyFormik extends Component {
                         <button type="button" className="showPassword" onClick={this.toggleShow}>Visa lösenord</button>
                         <ErrorMessage component="span" className="error" name="password" />
                     </label><br />
-                    <Link to="/register"><button className="btnPrimary" type="button">Registrera</button></Link>
+                    <div className="btnPosition">
+                        <Link to="/register"><button className="btnSec" type="button">Registrera</button></Link>
 
-                    <button className="btnPrimary">Logga in</button>
+                        <button className="btnPrimary">Logga in</button>
+                    </div>
+                    
                 </Form>
             </main>
         );

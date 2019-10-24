@@ -1,29 +1,101 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 100%;
+}
+
+body,
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0 auto;
+    padding: 0;
+    min-height: 100%;
+    font-size: 1.3em;
+}
+
 .App {
-    text-align: center;
-}
-
-.App-logo {
-    height: 40vmin;
-}
-
-.App-header {
-    background-color: #282c34;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+    align-items: stretch;
+    min-height: 100%;
 }
 
-.App-link {
-    color: #09d3ac;
+#root {
+    height: 100%;
 }
+
+header,
+main,
+footer {
+    flex-shrink: 0;
+}
+
+main {
+    padding-top: 200px;
+    margin: 0 auto 2em auto;
+    max-width: 1100px;
+    flex-grow: 1;
+}
+
+h2,
+h3,
+h4,
+p,
+address,
+iframe {
+    margin-bottom: 1.5em;
+}
+
+h2,
+h3,
+h4,
+h5 {
+    
+}
+
+p,
+ul {
+    line-height: 1.4em;
+}
+
+/* Style for products.  */
+/* ------------------------------------------------------------------*/
+
+.product-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.product-section img {
+    width: 300px;
+    border-top-right-radius: 87px;
+}
+
+.product {
+    margin-bottom: 2em;
+    border: 1px solid #9d9d9d9e;
+    border-bottom-left-radius: 87px;
+    border-top-right-radius: 87px;
+}
+
+.product p,
+.product h3 {
+    margin-left: 1em;
+}
+
 
 /* Style for the button "Köp".  */
 /* ------------------------------------------------------------------*/
-button {
+.button {
     position: relative;
     display: inline-block;
     cursor: pointer;
@@ -36,11 +108,13 @@ button {
     font-size: inherit;
     font-family: inherit;
 }
-button.buy {
+.button.buy {
     width: 12rem;
     height: auto;
+    margin-left: 5em;
+    margin-bottom: 2em;
 }
-button.buy .circle {
+.button.buy .circle {
     transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
     position: relative;
     margin: 0;
@@ -49,7 +123,7 @@ button.buy .circle {
     background: #282936;
     border-radius: 1.625rem;
 }
-button.buy .circle .icon {
+.button.buy .circle .icon {
     transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
     position: absolute;
     top: 0;
@@ -57,14 +131,14 @@ button.buy .circle .icon {
     margin: auto;
     background: #fff;
 }
-button.buy .circle .icon.arrow {
+.button.buy .circle .icon.arrow {
     transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
     left: 0.625rem;
     width: 1.125rem;
     height: 0.125rem;
     background: none;
 }
-button.buy .circle .icon.arrow::before {
+.button.buy .circle .icon.arrow::before {
     position: absolute;
     content: '';
     top: -0.25rem;
@@ -76,7 +150,7 @@ button.buy .circle .icon.arrow::before {
     -webkit-transform: rotate(45deg);
             transform: rotate(45deg);
 }
-button.buy .button-text {
+.button.buy .button-text {
     transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
     position: absolute;
     top: 0;
@@ -91,14 +165,175 @@ button.buy .button-text {
     text-align: center;
     text-transform: uppercase;
 }
-button:hover .circle {
+.button:hover .circle {
     width: 100%;
 }
-button:hover .circle .icon.arrow {
+.button:hover .circle .icon.arrow {
     background: #fff;
     -webkit-transform: translate(1rem, 0);
             transform: translate(1rem, 0);
 }
-button:hover .button-text {
+.button:hover .button-text {
     color: #fff;
 }
+
+
+/* Style for the form.  */
+/* ------------------------------------------------------------------*/
+
+form {
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+label {
+    margin: 5px 10px 5px 0;
+    width: 100%;
+    display: inline-block;
+}
+
+input,
+select,
+textarea {
+    vertical-align: middle;
+    margin: 5px 10px 5px 0;
+    padding: 0.5em;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    font-size: 0.9em;
+}
+
+select:focus-within,
+option:focus {
+    cursor: pointer;
+    border: 2px solid #0788ef;
+}
+
+
+
+input,
+select,
+textarea {
+    width: 15em;
+    padding: 10px;
+    box-sizing: border-box;
+    background: none;
+    outline: none;
+    resize: none;
+    transition: all 0.3s;
+    border-radius: 20px;
+    border: 2px solid #31ce8cc4;
+}
+
+textarea {
+    width: 30em;
+    height: 30em;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border: 2px solid #0788ef;
+}
+
+input:hover,
+textarea:hover,
+select:hover {
+    background-color: #31ce8cc4;
+}
+
+input[type="checkbox"] {
+    width: 10%;
+}
+
+.showPassword,
+.btnSec,
+.btnPrimary {
+    width: 11em;
+    padding: 0.5em;
+    box-sizing: border-box;
+    border-radius: 20px;
+    color: #3b3a3acf;
+    font-size: 0.9em;
+    border: 2px solid #31ce8cc4;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+
+.btnPosition {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btnSec {
+    background-color: rgb(40, 41, 54);
+    color: rgb(255, 255, 255);
+    border: 2px solid rgb(40, 41, 54);
+}
+
+.btnPrimary {
+    background: #31ce8cc4;
+}
+
+.showPassword:hover,
+.btnPrimary:hover,
+.btnSec:hover,
+.showPassword:focus,
+.btnPrimary:focus,
+.btnSec:focus {
+    box-shadow: 0px 15px 20px rgba(31, 8, 0, 0.685);
+    transform: translateY(-7px);
+}
+
+.is-invalid,
+.is-invalid:focus {
+    background-color: #f3aeaec4;
+    border: 2px solid #ef2a2ac4;
+}
+
+.error {
+    color: #e40000;
+}
+
+
+/* Style for footer.  */
+/* ------------------------------------------------------------------*/
+
+footer {
+    background-color: #233534;
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+}
+
+footer p {
+    color: white;
+    margin-bottom: 0;
+
+}
+
+.social {
+    align-self: center;
+}
+
+.social a {
+    color: white;
+    margin-right: 2em;
+}
+
+
+@media only screen and (max-width: 600px){
+    main {
+        width: 100%;
+        margin: 0 auto 2em auto;
+        padding: 1em;
+    }
+}
+
