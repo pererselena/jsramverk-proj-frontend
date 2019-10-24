@@ -6,6 +6,7 @@ import Depot from './components/Depot.js';
 
 import SignUp from './components/Register.js';
 import SignIn from './components/Login.js';
+import Logo from "./images/graph.png";
 
 
 import './App.css';
@@ -18,7 +19,8 @@ class App extends Component {
                     <header>
                         <div className="header-content">
                             <section className="flash">
-                                <h1>JSRamverk</h1>
+                                <img src={Logo}></img>
+                                <h1>Trading</h1>
                             </section>
                             <nav>
                                 <Link to="/">Hem</Link>
@@ -27,9 +29,14 @@ class App extends Component {
                             </nav>
                         </div>
                     </header>
+                    <section id="flash">
+                        <svg width="100%" height="100" viewBox="0 0 100 102" preserveAspectRatio="none">
+                            <path d="M0 0 L50 90 L100 0 V100 H0" fill="#fff" />
+                        </svg>
+                    </section>
                     <Route exact path="/" component={Home} />
                     <Route path="/depot/" component={Depot} />
-                <Route exact path="/login" component={SignIn} />
+                    <Route exact path="/login" component={SignIn} />
                     <Route exact path="/register" component={SignUp} />
 
                     <footer>
