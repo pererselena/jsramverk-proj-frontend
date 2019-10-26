@@ -102,11 +102,13 @@ const SignIn = withFormik({
             })
                 .then(res => res.json())
                 .then(function (res) {
+                    console.log(res.data);                    
                     sessionStorage.setItem("token", res.data.token);
+                    sessionStorage.setItem("userId", res.data.userId);
+                    setStatus({
+                        redirectTo: true
+                    });
                 });
-            setStatus({
-                redirectTo: true
-            });
         }, 1000);
 
     }

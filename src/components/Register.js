@@ -158,9 +158,10 @@ const SignUp = withFormik({
             .then(res => res.json())
             .then(function (res) {
                 sessionStorage.setItem("token", res.data.token);
-            });
-            setStatus({
-                redirectTo: true
+                sessionStorage.setItem("userId", res.data.userId);
+                setStatus({
+                    redirectTo: true
+                });
             });
         }, 1000);
     }
