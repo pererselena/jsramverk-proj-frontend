@@ -9,8 +9,16 @@ const Home = () => {
     const [title, setTitle] = useState('');
     //console.log(product);
 
+    var apiURL = "";
+
+    if (process.env.NODE_ENV === "production") {
+        apiURL = "https://trade-api.elenaperers.me"
+    } else {
+        apiURL = "http://localhost:1337"
+    }
+
     useEffect(() => {
-        fetch('http://localhost:1337/')
+        fetch(apiURL)
             .then(res => res.json())
             .then(function (res) {
                 setTitle(res.data.title);
