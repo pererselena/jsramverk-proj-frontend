@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Buy from './Buy';
 
 
 
@@ -7,6 +8,7 @@ import React, { useEffect, useState } from 'react';
 const Home = () => {
     const [product, setProduct] = useState('');
     const [title, setTitle] = useState('');
+    const [showBuy, setShowBuy] = useState(false)
     //console.log(product);
 
     var apiURL = "";
@@ -26,6 +28,10 @@ const Home = () => {
             });
     });
 
+    function handleBuy() {
+        setShowBuy(!showBuy);
+    }
+
     return (
         <main>
             <h2>{title}</h2>
@@ -37,12 +43,15 @@ const Home = () => {
                             <h3>{item.title}</h3>
                             <p>{item.description}</p>
                             <p className="price">Pris: </p>
-                            <button className="button buy">
+                            <button className="button buy" onClick={handleBuy}>
                                 <div className="circle">
                                     <span className="icon arrow"></span>
                                 </div>
                                 <p className="button-text">Köp</p>
                             </button>
+                            { showBuy ? 
+                                <Buy productId={item._id} productName={item.title} price={0} /> : null
+                            }
                         </div>);
                     })
                     : null}
