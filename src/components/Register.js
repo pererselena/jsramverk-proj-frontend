@@ -27,7 +27,7 @@ class MyFormik extends Component {
         if (this.props.status) {
             const redirectTo = this.props.status.redirectTo;
             if (redirectTo === true) {
-                return <Redirect to="/login/" />;
+                return <Redirect to="/depot/" />;
             }
         }
         return (
@@ -131,29 +131,39 @@ const SignUp = withFormik({
     }),
 
 
-    // handleSubmit: (values, { setSubmitting, resetForm, setStatus }) => {
-    //     setTimeout(() => {
-    //         resetForm();
-    //         setSubmitting(false);
-    //         var data = {
-    //             name: values.name,
-    //             password: values.password,
-    //             email: values.email,
-    //             birthday: values.year + "-" + values.month + "-" + values.day
-    //         };
-    //         fetch('https://me-api.elenaperers.me/register', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Accept': 'application/json',
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify(data)
-    //         });
-    //         setStatus({
-    //             redirectTo: true
-    //         });
-    //     }, 1000);
-    // }
+    handleSubmit: (values, { setSubmitting, resetForm, setStatus }) => {
+        var apiURL = "";
+        if (process.env.NODE_ENV === "production") {
+            apiURL = "https://trade-api.elenaperers.me"
+        } else {
+            apiURL = "http://localhost:1337"
+        }
+        setTimeout(() => {
+            resetForm();
+            setSubmitting(false);
+            var data = {
+                name: values.name,
+                password: values.password,
+                email: values.email,
+                birthday: values.year + "-" + values.month + "-" + values.day
+            };
+            fetch(`${apiURL}/register/`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(function (res) {
+                sessionStorage.setItem("token", res.data.token);
+            });
+            setStatus({
+                redirectTo: true
+            });
+        }, 1000);
+    }
 })(MyFormik);
 
 export default SignUp;

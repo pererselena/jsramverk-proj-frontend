@@ -21,13 +21,18 @@ class MyFormik extends Component {
             redirectTo: false
         };
         this.toggleShow = this.toggleShow.bind(this);
+        if (process.env.NODE_ENV === "production") {
+            this.apiURL = "https://trade-api.elenaperers.me"
+        } else {
+            this.apiURL = "http://localhost:1337"
+        }
     }
 
     render() {
         if (this.props.status) {
             const redirectTo = this.props.status.redirectTo;
             if (redirectTo === true) {
-                return <Redirect to="/reports/" />;
+                return <Redirect to="/depot/" />;
             }
         }
         return (
@@ -73,32 +78,38 @@ const SignIn = withFormik({
     }),
 
 
-    // handleSubmit: (values, { setSubmitting, resetForm, setStatus }) => {
-    //     setTimeout(() => {
-    //         resetForm();
-    //         setSubmitting(false);
-    //         var data = {
-    //             password: values.password,
-    //             email: values.email
-    //         };
-    //         fetch('https://me-api.elenaperers.me/login', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Accept': 'application/json',
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify(data)
-    //         })
-    //             .then(res => res.json())
-    //             .then(function (res) {
-    //                 localStorage.setItem("token", res.data.token);
-    //             });
-    //         setStatus({
-    //             redirectTo: true
-    //         });
-    //     }, 1000);
+    handleSubmit: (values, { setSubmitting, resetForm, setStatus }) => {
+        var apiURL = "";
+        if (process.env.NODE_ENV === "production") {
+            apiURL = "https://trade-api.elenaperers.me"
+        } else {
+            apiURL = "http://localhost:1337"
+        }
+        setTimeout(() => {
+            resetForm();
+            setSubmitting(false);
+            var data = {
+                password: values.password,
+                email: values.email
+            };
+            fetch(`${apiURL}/login/`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+                .then(res => res.json())
+                .then(function (res) {
+                    sessionStorage.setItem("token", res.data.token);
+                });
+            setStatus({
+                redirectTo: true
+            });
+        }, 1000);
 
-    // }
+    }
 })(MyFormik);
 
 export default SignIn;
