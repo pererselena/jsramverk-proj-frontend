@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 import Home from './components/Home.js';
 import Depot from './components/Depot.js';
 import Buy from './components/Buy.js';
+import Sell from './components/Sell.js';
+
 
 import SignUp from './components/Register.js';
 import SignIn from './components/Login.js';
@@ -38,6 +40,7 @@ class App extends Component {
                     <Route exact path="/" component={Home} />
                     <Route path="/depot/" component={Depot} />
                     <Route path="/buy/" component={Buy} />
+                    <Route path="/sell/" component={Sell} />
                     <Route exact path="/login" component={SignIn} />
                     <Route exact path="/register" component={SignUp} />
 
