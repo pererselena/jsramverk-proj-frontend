@@ -5,6 +5,7 @@ import Home from './components/Home.js';
 import Depot from './components/Depot.js';
 import Buy from './components/Buy.js';
 import Sell from './components/Sell.js';
+import AddMoney from './components/AddMoney.js';
 
 
 import SignUp from './components/Register.js';
@@ -41,6 +42,8 @@ class App extends Component {
                     <Route path="/depot/" component={Depot} />
                     <Route path="/buy/" component={Buy} />
                     <Route path="/sell/" component={Sell} />
+                    <Route path="/addmoney/" component={AddMoney} />
+
                     <Route exact path="/login" component={SignIn} />
                     <Route exact path="/register" component={SignUp} />
 

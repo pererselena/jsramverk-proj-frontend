@@ -45,7 +45,12 @@ const Depot = () => {
             <section className="userInfo">
                 <h3>{name}</h3>
                 <p>Saldo: {balance}</p>
-                <button className="btnPrimary">Överföring</button>
+                <Link to={{
+                    pathname: "/addmoney",
+                }}>
+                    <button className="btnPrimary">Överföring</button>
+                </Link>
+                
             </section>
             <section className="depot-section">
                 {items ?
