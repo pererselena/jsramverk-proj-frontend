@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -9,6 +11,8 @@ const Depot = () => {
     const [title, setTitle] = useState('');
     const [balance, setBalance] = useState('');
     const [name, setName] = useState('');
+    const [fetchOnce, setFetechOnce] = useState(false);
+
 
     //console.log(product);
     var apiURL = "";
@@ -21,14 +25,18 @@ const Depot = () => {
     }
 
     useEffect(() => {
-        fetch(apiURL + "/depot/" + userId)
-            .then(res => res.json())
-            .then(function (res) {
-                setTitle(res.data.title);
-                setItems(res.data.items);
-                setBalance(res.data.balance);
-                setName(res.data.name);
-            });
+        if (!fetchOnce) {
+            setFetechOnce(true)
+            fetch(apiURL + "/depot/" + userId)
+                .then(res => res.json())
+                .then(function (res) {
+                    setTitle(res.data.title);
+                    setItems(res.data.items);
+                    setBalance(res.data.balance);
+                    setName(res.data.name);
+                    console.log(res.data.items)
+                });
+        }
     });
 
     return (
@@ -43,15 +51,26 @@ const Depot = () => {
                 {items ?
                     items.map((item, i) => {
                         return (<div key={i} className="items">
-                            <h3>{item.title}</h3>
-                            <p>{item.description}</p>
-                            <p className="price">Pris: </p>
-                            <button className="button buy">
-                                <div className="circle">
-                                    <span className="icon arrow"></span>
-                                </div>
-                                <p className="button-text">Sälj</p>
-                            </button>
+                            <h3>{item.product.title}</h3>
+                            <p>{item.product.description}</p>
+                            <p className="price">Pris:{item.boughtPrice} </p>
+                            <p>Antal: {item.amount}</p>
+                            <Link to={{
+                                pathname: "/Sell",
+                                state: {
+                                    productId: item._id,
+                                    productName: item.title,
+                                    price: 10
+                                }
+                            }}>
+                                <button className="button buy">
+                                    <div className="circle">
+                                        <span className="icon arrow"></span>
+                                    </div>
+                                    <p className="button-text">Sälj</p>
+                                </button>
+                            </Link>
+                            
                         </div>);
                     })
                     : null}
