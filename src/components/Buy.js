@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import {
     withFormik,
     Form,
@@ -17,7 +18,7 @@ const MyFormik = ({
 }) => (
         <main>
             <h2>Köp produkt.</h2>
-            <h3>{values.productName}</h3>
+            <h3>{values.location.state.productName}</h3>
             <Form>
                 <label htmlFor="amount">Antal:<br />
 
@@ -28,19 +29,17 @@ const MyFormik = ({
                 </label><br />
                 <button className="btnPrimary">Köp</button>
             </Form>
-            <p>Pris: {values.price}</p>
+            <p>Pris: {values.location.state.price}</p>
         </main>
     )
 
 
 const Buy = withFormik({
     enableReinitialize: true,
-    mapPropsToValues({ amount, productId, productName, price }) {
+    mapPropsToValues({ amount, location }) {
         return {
             amount: amount || "",
-            productId: productId || "",
-            productName: productName || "",
-            price: price || ""
+            location: location || ""
         };
     },
 
@@ -56,7 +55,8 @@ const Buy = withFormik({
             var data = {
                 amount: values.amount,
                 user_id: sessionStorage.getItem("userId"),
-                product_id: props.productId
+                product_id: values.location.state.productId,
+                price: 10
             };
             var apiURL = "";
 
@@ -77,7 +77,6 @@ const Buy = withFormik({
             setStatus({
                 redirectTo: true
             });
-            props.callbackFromParent(true)
         }, 1000);
     }
 })(MyFormik);

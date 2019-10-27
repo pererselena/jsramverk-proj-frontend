@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 import Home from './components/Home.js';
 import Depot from './components/Depot.js';
+import Buy from './components/Buy.js';
 
 import SignUp from './components/Register.js';
 import SignIn from './components/Login.js';
@@ -19,7 +20,7 @@ class App extends Component {
                     <header>
                         <div className="header-content">
                             <section className="flash">
-                                <img src={Logo}></img>
+                                <img src={Logo} alt="graph"></img>
                                 <h1>Trading</h1>
                             </section>
                             <nav>
@@ -36,6 +37,7 @@ class App extends Component {
                     </section>
                     <Route exact path="/" component={Home} />
                     <Route path="/depot/" component={Depot} />
+                    <Route path="/buy/" component={Buy} />
                     <Route exact path="/login" component={SignIn} />
                     <Route exact path="/register" component={SignUp} />
 
