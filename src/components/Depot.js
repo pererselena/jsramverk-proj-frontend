@@ -97,7 +97,7 @@ const Depot = () => {
                                 state: {
                                     productId: item._id,
                                     productName: item.title,
-                                    price: 10
+                                    price: item.product.startingPoint
                                 }
                             }}>
                                 <button className="button buy">

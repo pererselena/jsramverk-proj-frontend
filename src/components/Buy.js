@@ -57,7 +57,7 @@ const Buy = withFormik({
                 amount: values.amount,
                 user_id: sessionStorage.getItem("userId"),
                 product_id: values.location.state.productId,
-                price: 10
+                price: values.location.state.price
             };
             var apiURL = "";
 
