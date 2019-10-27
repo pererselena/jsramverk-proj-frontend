@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Buy from './Buy';
+import { Link } from 'react-router-dom';
 
 
 
@@ -8,8 +8,7 @@ import Buy from './Buy';
 const Home = () => {
     const [product, setProduct] = useState('');
     const [title, setTitle] = useState('');
-    const [showBuy, setShowBuy] = useState(false)
-    //console.log(product);
+    const [fetchOnce, setFetechOnce] = useState(false);
 
     var apiURL = "";
 
@@ -19,18 +18,22 @@ const Home = () => {
         apiURL = "http://localhost:1337"
     }
 
-    useEffect(() => {
-        fetch(apiURL)
-            .then(res => res.json())
-            .then(function (res) {
-                setTitle(res.data.title);
-                setProduct(res.data.products);
-            });
-    });
+    async function fetchData() {
+        if (!fetchOnce) {
+            setFetechOnce(true)
+            await fetch(apiURL)
+                .then(res => res.json())
+                .then(function (res) {
+                    setTitle(res.data.title);
+                    setProduct(res.data.products);
+                });
+        }
 
-    function handleBuy() {
-        setShowBuy(!showBuy);
     }
+
+    useEffect(() => {
+        fetchData();
+    });
 
     return (
         <main>
@@ -43,15 +46,22 @@ const Home = () => {
                             <h3>{item.title}</h3>
                             <p>{item.description}</p>
                             <p className="price">Pris: </p>
-                            <button className="button buy" onClick={handleBuy}>
-                                <div className="circle">
-                                    <span className="icon arrow"></span>
-                                </div>
-                                <p className="button-text">Köp</p>
-                            </button>
-                            { showBuy ? 
-                                <Buy productId={item._id} productName={item.title} price={0} /> : null
-                            }
+                            <Link to={{
+                                pathname: "/Buy",
+                                state: {
+                                    productId: item._id,
+                                    productName: item.title,
+                                    price: 10
+                                }
+                            }}>
+                                <button className="button buy">
+                                    <div className="circle">
+                                        <span className="icon arrow"></span>
+                                    </div>
+                                    <p className="button-text">Köp</p>
+                                </button>
+                            </Link>
+
                         </div>);
                     })
                     : null}
