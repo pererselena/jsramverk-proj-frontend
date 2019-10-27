@@ -28,12 +28,31 @@ class MyFormik extends Component {
         }
     }
 
+    logOut() {
+        sessionStorage.removeItem("token");
+        sessionStorage.setItem("isLoggedIn", false);
+        sessionStorage.removeItem("userId");
+    }
+
     render() {
         if (this.props.status) {
             const redirectTo = this.props.status.redirectTo;
             if (redirectTo === true) {
                 return <Redirect to="/depot/" />;
             }
+        }
+        if (sessionStorage.getItem("token")) {
+            return (
+                <main>
+                    <h2>Logga ut</h2>
+                    <div className="btnPosition">
+                        <Link to="/">
+                            <button className="btnPrimary" onClick={this.logOut}>Logga ut</button>
+                        </Link>
+
+                    </div>
+                </main>
+            );
         }
         return (
             <main>
@@ -54,7 +73,7 @@ class MyFormik extends Component {
 
                         <button className="btnPrimary">Logga in</button>
                     </div>
-                    
+
                 </Form>
             </main>
         );
@@ -102,9 +121,10 @@ const SignIn = withFormik({
             })
                 .then(res => res.json())
                 .then(function (res) {
-                    console.log(res.data);                    
+                    console.log(res.data);
                     sessionStorage.setItem("token", res.data.token);
                     sessionStorage.setItem("userId", res.data.userId);
+                    sessionStorage.setItem("isLoggedIn", true);
                     setStatus({
                         redirectTo: true
                     });

@@ -17,6 +17,7 @@ import './App.css';
 
 class App extends Component {
     render() {
+        console.log(sessionStorage.getItem("isLoggedIn"))
         return (
             <Router>
                 <div className="App">
@@ -29,7 +30,7 @@ class App extends Component {
                             <nav>
                                 <Link to="/">Hem</Link>
                                 <Link to="/depot/">Depot</Link>
-                                <Link to="/login">Logga in</Link>
+                                <Link to="/login">Logga ut</Link> <Link to="/login">Logga in</Link> 
                             </nav>
                         </div>
                     </header>
@@ -43,7 +44,6 @@ class App extends Component {
                     <Route path="/buy/" component={Buy} />
                     <Route path="/sell/" component={Sell} />
                     <Route path="/addmoney/" component={AddMoney} />
-
                     <Route exact path="/login" component={SignIn} />
                     <Route exact path="/register" component={SignUp} />
 
