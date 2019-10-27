@@ -17,7 +17,7 @@ const MyFormik = ({
     touched,
 }) => (
         <main>
-            <h2>Köp produkt.</h2>
+            <h2>Sälj produkt.</h2>
             <h3>{values.location.state.productName}</h3>
             <Form>
                 <label htmlFor="amount">Antal:<br />
@@ -28,14 +28,15 @@ const MyFormik = ({
                     <ErrorMessage component="span" className="error" name="amount" />
                 </label><br />
                 <p>Pris: {values.location.state.price}</p>
-                <button className="btnPrimary">Köp</button>
+                <button className="btnPrimary">Sälj</button>
             </Form>
-            {errors.apifault ? <p>{errors.apifault}</p> : null }
+            {errors.apifault ? <p>{errors.apifault}</p> : null}
+
         </main>
     )
 
 
-const Buy = withFormik({
+const Sell = withFormik({
     enableReinitialize: true,
     mapPropsToValues({ amount, location }) {
         return {
@@ -66,7 +67,7 @@ const Buy = withFormik({
             } else {
                 apiURL = "http://localhost:1337"
             }
-            fetch(apiURL + "/depot/buy", {
+            fetch(apiURL + "/depot/sell", {
                 method: 'PUT',
                 headers: {
                     'x-access-token': sessionStorage.getItem("token"),
@@ -76,19 +77,20 @@ const Buy = withFormik({
                 body: JSON.stringify(data)
             }).then(res => res.json())
                 .then(function (res) {
-                    if (res.status > 300)
+                    console.log(res.data)
+                    if (res.data.status > 300)
                     {
                         setErrors({
-                            apifault: res.data
+                            apifault: res.data.detail
                         })
                     } else {
                         setStatus({
                             redirectTo: true
                         });
                     }
-            })
+                })
         }, 1000);
     }
 })(MyFormik);
 
-export default Buy;
+export default Sell;
