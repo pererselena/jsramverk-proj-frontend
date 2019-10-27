@@ -27,9 +27,10 @@ const MyFormik = ({
                         value={values.amount} />
                     <ErrorMessage component="span" className="error" name="amount" />
                 </label><br />
+                <p>Pris: {values.location.state.price}</p>
                 <button className="btnPrimary">Köp</button>
             </Form>
-            <p>Pris: {values.location.state.price}</p>
+            {errors.apifault ? <p>{errors.apifault}</p> : null }
         </main>
     )
 
@@ -48,7 +49,7 @@ const Buy = withFormik({
     }),
 
 
-    handleSubmit: (values, { setSubmitting, resetForm, setStatus, props }) => {
+    handleSubmit: (values, { setSubmitting, resetForm, setStatus, setErrors }) => {
         setTimeout(() => {
             resetForm();
             setSubmitting(false);
@@ -73,6 +74,12 @@ const Buy = withFormik({
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(data)
+            }).then(res => res.json())
+                .then(function (res) {
+                    if(res.data == "Not enough money")
+                    setErrors({
+                        apifault: res.data
+                    })
             })
             setStatus({
                 redirectTo: true
