@@ -30,7 +30,14 @@ const Depot = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await fetch(apiURL + "/depot/" + userId)
+            const result = await fetch(apiURL + "/depot/" + userId, {
+                method: 'GET',
+                headers: {
+                    'x-access-token': sessionStorage.getItem("token"),
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            })
                 .then(res => res.json())
                 .then(function (res) {
                     return res.data;
@@ -44,7 +51,7 @@ const Depot = () => {
                 result.items.map((item) => {
                     products.map((product => {
                         if (product._id === item.product._id) {
-                            item.product = product;
+                            item.product.startingPoint = product.startingPoint;
                             return product;
                         }
                         return item;
@@ -57,7 +64,7 @@ const Depot = () => {
         fetchData();
         
     }, [apiURL, userId, socketUrl]);
-    
+
     var isLoggedIn = sessionStorage.getItem("isLoggedIn")
     if (isLoggedIn === "false") {
         return <Redirect to="/login/" />;
