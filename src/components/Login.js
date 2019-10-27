@@ -32,6 +32,7 @@ class MyFormik extends Component {
         sessionStorage.removeItem("token");
         sessionStorage.setItem("isLoggedIn", false);
         sessionStorage.removeItem("userId");
+        console.log("inloggad: ", sessionStorage.getItem("isLoggedIn"));
     }
 
     render() {

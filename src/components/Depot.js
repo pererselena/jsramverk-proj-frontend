@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import io from "socket.io-client";
 
 
@@ -45,8 +45,11 @@ const Depot = () => {
                     products.map((product => {
                         if (product._id === item.product._id) {
                             item.product = product;
+                            return product;
                         }
+                        return item;
                     }))
+                    return item;
                 })
                 setItems(result.items);
             });
@@ -54,6 +57,11 @@ const Depot = () => {
         fetchData();
         
     }, [apiURL, userId, socketUrl]);
+    
+    var isLoggedIn = sessionStorage.getItem("isLoggedIn")
+    if (isLoggedIn === "false") {
+        return <Redirect to="/login/" />;
+    }
 
     return (
         <main>
