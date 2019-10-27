@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import io from "socket.io-client";
+
 
 
 
@@ -11,33 +13,47 @@ const Depot = () => {
     const [title, setTitle] = useState('');
     const [balance, setBalance] = useState('');
     const [name, setName] = useState('');
-    const [fetchOnce, setFetechOnce] = useState(false);
 
 
-    //console.log(product);
     var apiURL = "";
     var userId = sessionStorage.getItem("userId");
 
+    var socketUrl = "";
+
     if (process.env.NODE_ENV === "production") {
-        apiURL = "https://trade-api.elenaperers.me"
+        apiURL = "https://trade-api.elenaperers.me";
+        socketUrl = 'https://socket-trade.elenaperers.me:443';
     } else {
-        apiURL = "http://localhost:1337"
+        apiURL = "http://localhost:1337";
+        socketUrl = 'http://localhost:3005';
     }
 
     useEffect(() => {
-        if (!fetchOnce) {
-            setFetechOnce(true)
-            fetch(apiURL + "/depot/" + userId)
+        const fetchData = async () => {
+            const result = await fetch(apiURL + "/depot/" + userId)
                 .then(res => res.json())
                 .then(function (res) {
-                    setTitle(res.data.title);
-                    setItems(res.data.items);
-                    setBalance(res.data.balance);
-                    setName(res.data.name);
-                    console.log(res.data.items)
+                    return res.data;
                 });
-        }
-    });
+            setTitle(result.title);
+            setBalance(result.balance);
+            setName(result.name);
+            var socket = io(socketUrl)
+            socket.on('stocks', (products) => {
+                console.log("items", result.items);
+                result.items.map((item) => {
+                    products.map((product => {
+                        if (product._id === item.product._id) {
+                            item.product = product;
+                        }
+                    }))
+                })
+                setItems(result.items);
+            });
+        };
+        fetchData();
+        
+    }, [apiURL, userId, socketUrl]);
 
     return (
         <main>
@@ -58,7 +74,8 @@ const Depot = () => {
                         return (<div key={i} className="items">
                             <h3>{item.product.title}</h3>
                             <p>{item.product.description}</p>
-                            <p className="price">Pris:{item.boughtPrice} </p>
+                            <p className="price">Köpt för:{item.boughtPrice} </p>
+                            <p className="price">Nuvarande pris:{item.product.startingPoint} </p>
                             <p>Antal: {item.amount}</p>
                             <Link to={{
                                 pathname: "/Sell",
