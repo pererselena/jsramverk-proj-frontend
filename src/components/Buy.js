@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import {
     withFormik,
     Form,
@@ -49,7 +48,7 @@ const Buy = withFormik({
     }),
 
 
-    handleSubmit: (values, { setSubmitting, resetForm, setStatus, setErrors }) => {
+    handleSubmit: (values, { setSubmitting, resetForm, setStatus, setErrors, props }) => {
         setTimeout(() => {
             resetForm();
             setSubmitting(false);
@@ -82,9 +81,7 @@ const Buy = withFormik({
                             apifault: res.data
                         })
                     } else {
-                        setStatus({
-                            redirectTo: true
-                        });
+                        props.history.push('/depot')
                     }
             })
         }, 1000);
