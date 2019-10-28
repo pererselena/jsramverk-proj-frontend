@@ -19,6 +19,7 @@ body {
     padding: 0;
     min-height: 100%;
     font-size: 1.3em;
+    color: #3b3a3acf;
 }
 
 .App {
@@ -59,6 +60,42 @@ p,
 ul {
     line-height: 1.4em;
 }
+
+
+/* Style for navbar.  */
+/* ------------------------------------------------------------------*/
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    height: 4em;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+nav a {
+    margin-right: 1em;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+
+nav a:hover {
+    text-shadow: 0px 15px 20px rgba(32, 31, 31, 0.753);
+    transform: translateY(-7px);
+}
+
+nav a:visited {
+    color: #3b3a3acf;
+}
+
+nav img {
+    width: 25px;
+}
+
+
+
+
 
 /* Style for flash section.  */
 /* ------------------------------------------------------------------*/
@@ -327,6 +364,7 @@ input[type="checkbox"] {
 .btnSec:focus {
     box-shadow: 0px 15px 20px rgba(31, 8, 0, 0.685);
     transform: translateY(-7px);
+    text-decoration: none;
 }
 
 .is-invalid,

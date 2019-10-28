@@ -11,6 +11,8 @@ import AddMoney from './components/AddMoney.js';
 import SignUp from './components/Register.js';
 import SignIn from './components/Login.js';
 import Logo from "./images/graph.png";
+import DepotImg from "./images/depot.png";
+import HomeImg from "./images/home.png";
 
 
 import './App.css';
@@ -24,15 +26,15 @@ class App extends Component {
                     <header>
                         <div className="header-content">
                             <nav>
-                                <Link to="/">Hem</Link>
-                                <Link to="/depot/">Depot</Link>
-                                <Link to="/login">Logga ut</Link> <Link to="/login">Logga in</Link> 
+                                <Link to="/"><img src={HomeImg} alt="home" /> Hem</Link>
+                                    <Link to="/depot/"><img src={DepotImg} alt="depot" /> Depot</Link>
+                                <Link to="/login" className="showPassword">Logga ut</Link> <Link to="/login" className="btnPrimary">Logga in</Link> 
                             </nav>
                         </div>
                     </header>
                     <section id="flash">
                         <section className="flash">
-                            <img src={Logo} alt="graph"></img>
+                            <img src={Logo} alt="graph" />
                             <h1>Trading</h1>
                         </section>
                         <svg width="100%" height="100" viewBox="0 0 100 102" preserveAspectRatio="none">
