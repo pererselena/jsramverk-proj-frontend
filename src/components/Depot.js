@@ -28,6 +28,9 @@ const Depot = () => {
         socketUrl = 'http://localhost:3005';
     }
 
+    var isLoggedIn = sessionStorage.getItem("isLoggedIn")
+   
+
     useEffect(() => {
         const fetchData = async () => {
             const result = await fetch(apiURL + "/depot/" + userId, {
@@ -61,12 +64,13 @@ const Depot = () => {
                 setItems(result.items);
             });
         };
-        fetchData();
-        
-    }, [apiURL, userId, socketUrl]);
+        if (isLoggedIn === "true") {
+            fetchData();
+        }
+    }, [apiURL, userId, socketUrl, isLoggedIn]);
 
-    var isLoggedIn = sessionStorage.getItem("isLoggedIn")
-    if (isLoggedIn === "false") {
+    
+    if (isLoggedIn !== "true") {
         return <Redirect to="/login/" />;
     }
 
@@ -90,7 +94,7 @@ const Depot = () => {
                             <h3>{item.product.title}</h3>
                             <p>{item.product.description}</p>
                             <p className="price">Köpt för:{item.boughtPrice} </p>
-                            <p className="price">Nuvarande pris:{item.product.startingPoint} </p>
+                            <p className="price">Nuvarande pris:{Math.round(item.product.startingPoint * 100) / 100} </p>
                             <p>Antal: {item.amount}</p>
                             <Link to={{
                                 pathname: "/Sell",
