@@ -26,7 +26,7 @@ const MyFormik = ({
                         value={values.amount} />
                     <ErrorMessage component="span" className="error" name="amount" />
                 </label><br />
-                <p>Pris: {values.location.state.price}</p>
+                <p>Pris: {Math.round(values.location.state.price * 100) / 100}</p>
                 <button className="btnPrimary">Köp</button>
             </Form>
             {errors.apifault ? <p>{errors.apifault}</p> : null }

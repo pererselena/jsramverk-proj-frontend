@@ -48,7 +48,7 @@ const Home = () => {
                             <img src={item.imagePath} alt={item.title}></img>
                             <h3>{item.title}</h3>
                             <p>{item.description}</p>
-                            <p className="price">Pris: {item.startingPoint}</p>
+                            <p className="price">Pris: {Math.round(item.startingPoint * 100)/100}</p>
                             <Link to={{
                                 pathname: "/Buy",
                                 state: {
