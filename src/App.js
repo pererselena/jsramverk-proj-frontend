@@ -23,10 +23,6 @@ class App extends Component {
                 <div className="App">
                     <header>
                         <div className="header-content">
-                            <section className="flash">
-                                <img src={Logo} alt="graph"></img>
-                                <h1>Trading</h1>
-                            </section>
                             <nav>
                                 <Link to="/">Hem</Link>
                                 <Link to="/depot/">Depot</Link>
@@ -35,8 +31,12 @@ class App extends Component {
                         </div>
                     </header>
                     <section id="flash">
+                        <section className="flash">
+                            <img src={Logo} alt="graph"></img>
+                            <h1>Trading</h1>
+                        </section>
                         <svg width="100%" height="100" viewBox="0 0 100 102" preserveAspectRatio="none">
-                            <path d="M0 0 L50 90 L100 0 V100 H0" fill="#fff" />
+                            <path d="M0 0 L50 90 L100 0 V100 H0" fill="#f4f4f4" />
                         </svg>
                     </section>
                     <Route exact path="/" component={Home} />
