@@ -96,14 +96,21 @@ svg{
 
 .product-section img {
     width: 300px;
-    border-top-right-radius: 87px;
+    border-top-right-radius: 11px;
+    border-top-left-radius: 11px;
 }
 
 .product {
     margin-bottom: 2em;
     border: 1px solid #9d9d9d9e;
-    border-bottom-left-radius: 87px;
-    border-top-right-radius: 87px;
+    border-radius: 11px;
+    transition: all 0.3s;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product:hover {
+    box-shadow: 0px 15px 20px rgba(17, 5, 2, 0.445);
+    transform: translateY(-7px);
 }
 
 .product p,
@@ -326,7 +333,7 @@ input[type="checkbox"] {
 /* ------------------------------------------------------------------*/
 
 footer {
-    background-color: #233534;
+    background-color: #0f254c;
     display: flex;
     flex-direction: column;
     padding: 2em;
