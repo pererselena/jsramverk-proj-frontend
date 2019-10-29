@@ -59,6 +59,7 @@ iframe {
 h2 {
     color: rgb(94, 215, 164);
     font-size: 3em;
+    text-align: center;
 }
 
 h3 {
@@ -69,6 +70,10 @@ h3 {
 p,
 ul {
     line-height: 1.4em;
+}
+
+.priceChart {
+    margin-bottom: 3em;
 }
 
 
@@ -499,6 +504,10 @@ footer p {
 
     .flash h1 {
         font-size: 3em;
+    }
+
+    h2 {
+        font-size: 2em;
     }
 
     .flash {
