@@ -22,10 +22,10 @@ const Depot = () => {
 
     if (process.env.NODE_ENV === "production") {
         apiURL = "https://trade-api.elenaperers.me";
-        socketUrl = 'https://socket-trade.elenaperers.me:443';
+        socketUrl = 'https://socket-trade.elenaperers.me';
     } else {
-        apiURL = "http://localhost:1337";
-        socketUrl = 'http://localhost:3005';
+        apiURL = "http://localhost:1338";
+        socketUrl = 'http://localhost:3010';
     }
 
     var isLoggedIn = sessionStorage.getItem("isLoggedIn")

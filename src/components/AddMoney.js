@@ -58,7 +58,7 @@ const AddMoney = withFormik({
             if (process.env.NODE_ENV === "production") {
                 apiURL = "https://trade-api.elenaperers.me"
             } else {
-                apiURL = "http://localhost:1337"
+                apiURL = "http://localhost:1338"
             }
             fetch(apiURL + "/depot/addmoney", {
                 method: 'PUT',

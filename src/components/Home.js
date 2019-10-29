@@ -17,10 +17,10 @@ class Home extends Component {
 
         if (process.env.NODE_ENV === "production") {
             this.apiURL = "https://trade-api.elenaperers.me";
-            this.socketUrl = 'https://socket-trade.elenaperers.me:443';
+            this.socketUrl = 'https://socket-trade.elenaperers.me';
         } else {
-            this.apiURL = "http://localhost:1337";
-            this.socketUrl = 'http://localhost:3005';
+            this.apiURL = "http://localhost:1338";
+            this.socketUrl = 'http://localhost:3010';
         }
     }
 

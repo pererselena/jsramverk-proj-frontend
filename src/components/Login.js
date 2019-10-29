@@ -24,7 +24,7 @@ class MyFormik extends Component {
         if (process.env.NODE_ENV === "production") {
             this.apiURL = "https://trade-api.elenaperers.me"
         } else {
-            this.apiURL = "http://localhost:1337"
+            this.apiURL = "http://localhost:1338"
         }
     }
 
