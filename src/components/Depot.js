@@ -29,7 +29,7 @@ const Depot = () => {
     }
 
     var isLoggedIn = sessionStorage.getItem("isLoggedIn")
-   
+    var socket = io(socketUrl);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -48,7 +48,6 @@ const Depot = () => {
             setTitle(result.title);
             setBalance(result.balance);
             setName(result.name);
-            var socket = io(socketUrl)
             socket.on('stocks', (products) => {
                 console.log("items", result.items);
                 result.items.map((item) => {
@@ -67,7 +66,10 @@ const Depot = () => {
         if (isLoggedIn === "true") {
             fetchData();
         }
-    }, [apiURL, userId, socketUrl, isLoggedIn]);
+        return function cleanup() {
+            socket.close();
+        }
+    }, [apiURL, userId, socket, isLoggedIn]);
 
     
     if (isLoggedIn !== "true") {
@@ -80,7 +82,7 @@ const Depot = () => {
             <section className="userInfo">
                 <section className="user-fixed">
                     <h3>{name}</h3>
-                    <p>Saldo: {balance}</p>
+                    <p>Saldo: {Math.round(100 * balance) / 100}</p>
                     <Link to={{
                         pathname: "/addmoney",
                     }}>
@@ -95,7 +97,7 @@ const Depot = () => {
                         return (<div key={i} className="items">
                             <h3>{item.product.title}</h3>
                             <p>{item.product.description}</p>
-                            <p className="price">Köpt för:{item.boughtPrice} </p>
+                            <p className="price">Köpt för:{Math.round(100 * item.boughtPrice) / 100} </p>
                             <p className="price">Nuvarande pris:{Math.round(item.product.startingPoint * 100) / 100} </p>
                             <p>Antal: {item.amount}</p>
                             <Link to={{
