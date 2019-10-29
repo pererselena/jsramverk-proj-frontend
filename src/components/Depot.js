@@ -75,16 +75,18 @@ const Depot = () => {
     }
 
     return (
-        <main>
+        <main className="depot-wrapper">
             <h2>{title}</h2>
             <section className="userInfo">
-                <h3>{name}</h3>
-                <p>Saldo: {balance}</p>
-                <Link to={{
-                    pathname: "/addmoney",
-                }}>
-                    <button className="btnPrimary">Överföring</button>
-                </Link>
+                <section className="user-fixed">
+                    <h3>{name}</h3>
+                    <p>Saldo: {balance}</p>
+                    <Link to={{
+                        pathname: "/addmoney",
+                    }}>
+                        <button className="btnPrimary">Överföring</button>
+                    </Link>
+                </section>
                 
             </section>
             <section className="depot-section">

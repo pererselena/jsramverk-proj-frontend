@@ -41,7 +41,7 @@ footer {
 }
 
 main {
-    padding-top: 200px;
+    padding-top: 3em;
     margin: 0 auto 2em auto;
     max-width: 1100px;
     flex-grow: 1;
@@ -54,6 +54,16 @@ p,
 address,
 iframe {
     margin-bottom: 1.5em;
+}
+
+h2 {
+    color: rgb(94, 215, 164);
+    font-size: 3em;
+}
+
+h3 {
+    color: rgb(94, 215, 164);
+    font-size: 1.5em;
 }
 
 p,
@@ -103,8 +113,12 @@ nav img {
 #flash{
     position: relative;
     background: url('/images/flash.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
     height: 500px;
+    width: 100%;
 }
 svg{
     position: absolute;
@@ -133,6 +147,39 @@ svg{
     text-shadow: 2px 2px 4px #00000085;
 }
 
+/* Style for depot.  */
+/* ------------------------------------------------------------------*/
+
+.depot-wrapper {
+    display: flex;  
+    flex-flow: row wrap;
+    font-weight: bold;
+    justify-content: space-between;
+}
+
+.depot-wrapper h2 {
+    padding: 10px;
+    flex: 1 100%;
+    text-align: center;
+}
+
+.userInfo {
+    order: 2;
+}
+
+.user-fixed {
+    position: sticky;
+    top: 0;
+}
+
+.depot-section {
+    order: 1;
+}
+
+
+
+
+
 /* Style for products.  */
 /* ------------------------------------------------------------------*/
 
@@ -148,7 +195,8 @@ svg{
     border-top-left-radius: 11px;
 }
 
-.product {
+.product,
+.items {
     margin-bottom: 2em;
     background-color: white;
     border-radius: 11px;
@@ -156,14 +204,21 @@ svg{
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 }
 
-.product:hover {
+.product:hover,
+.items:hover {
     box-shadow: 0px 15px 20px rgba(17, 5, 2, 0.445);
     transform: translateY(-7px);
 }
 
 .product p,
-.product h3 {
+.product h3,
+.items p,
+.items h3 {
     margin-left: 1em;
+}
+
+.items {
+    padding-top: 1em;
 }
 
 
@@ -403,12 +458,60 @@ footer p {
     margin-right: 2em;
 }
 
+@media only screen and (min-width: 1300px){
+
+    .flash h1 {
+        font-size: 6em;
+    }
+}
+
+@media only screen and (max-width: 700px){
+    main {
+        width: 100%;
+        margin: 0 auto 2em auto;
+        padding: 1em;
+    }
+
+    .flash h1 {
+        font-size: 3.5em;
+    }
+
+    .flash {
+        left: 32%;
+    }
+
+    nav.showPassword,
+    nav.btnPrimary {
+        width: 7em;
+    }
+
+    nav {
+        font-size: 0.7em;
+    }
+}
 
 @media only screen and (max-width: 600px){
     main {
         width: 100%;
         margin: 0 auto 2em auto;
         padding: 1em;
+    }
+
+    .flash h1 {
+        font-size: 3em;
+    }
+
+    .flash {
+        left: 30%;
+    }
+
+    nav.showPassword,
+    nav.btnPrimary {
+        width: 7em;
+    }
+
+    nav {
+        font-size: 0.6em;
     }
 }
 
