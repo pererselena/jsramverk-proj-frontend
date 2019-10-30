@@ -24,6 +24,20 @@ I buy och sell ser man det pris som visades i endera home eller depå. Informati
 Alla forms som finns i appen använder formik med yup som validering av input.
 Om det går fel på api sidan och den skickar tillbaks en felkod visas den i frontend också.
 
+## Test frontend
+
+Jag har skapat följande use cases:
+Verifiera att första sidan visas med korrekt titel och rubrik.
+
+Via navbaren gå till logga in och sedan vidare till registrera.
+
+Via navbaren gå till depot men då vi inte är inloggad verifiera att vi är på logga in sidan.
+
+Via navbaren använd logga ut länken och verifiera att vi kommer till inloggnings sidan.
+
+Via navbaren gå till inloggningssidan.
+
+
 ## Available Scripts
 
 In the project directory, you can run:
